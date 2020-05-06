@@ -2,13 +2,13 @@
 clear
 %F=0; % fuerza externa en cero
 %rho_a=0; % coeficiente roce con el aire
-y0=[10*pi/180 0 0]; % condiciones iniciales
+y0=[10*pi/180 0 10*pi/180 0 0]; % condiciones iniciales
 dt=0.01;  % periodo del sistema
 k=1;
 tmax=20.0;  % tiempo maximo de la simulacion
 
 % inicializacion variables de salida
-yt=zeros(fix(tmax/dt)+1,3);
+yt=zeros(fix(tmax/dt)+1,5);
 tt=zeros(fix(tmax/dt)+1,1);
 
 for t1=0:dt:tmax
@@ -22,6 +22,9 @@ for t1=0:dt:tmax
     if yt(k,1)<0, yt(k,1)=yt(k,1)+2*pi; end;
     if yt(k,1)>2*pi, yt(k,1)=yt(k,1)-2*pi; end;
     
+    if yt(k,3)<0, yt(k,3)=yt(k,3)+2*pi; end;
+    if yt(k,3)>2*pi, yt(k,3)=yt(k,3)-2*pi; end;
+    
     % toma ultimo valor tiempo simulado
     tt(k,:)=t(max(size(y)));
     
@@ -33,5 +36,6 @@ for t1=0:dt:tmax
 end
 
 % dibuja respuesta de angulo
-plot(tt,yt(:,1)*180/pi); xlabel('tiempo, segs'); ylabel('Alfa, grados'); %pause
+plot(tt,yt(:,1)*180/pi); xlabel('tiempo, segs'); ylabel('Alfa, grados'); pause
 
+plot(tt,yt(:,3)*180/pi); xlabel('tiempo, segs'); ylabel('Beta, grados'); %pause
