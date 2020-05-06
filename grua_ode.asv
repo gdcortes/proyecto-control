@@ -1,11 +1,11 @@
 % CAIDA LIBRE GRUA
 clear
 %F=0; % fuerza externa en cero
-
-y0=[(pi/6)*pi/180 0.6 (pi/3)*pi/180 0.6 5 1]; % condiciones iniciales
+rho_a=0; % coeficiente roce con el aire
+y0=[10*pi/180 0 10*pi/180 0 0 0]; % condiciones iniciales
 dt=0.1;  % periodo del sistema
 k=1;
-tmax=25;  % tiempo maximo de la simulacion (ojo con tiempo de simulacion para valores iniciales muy altos)
+tmax=50;  % tiempo maximo de la simulacion (ojo con tiempo de simulacion para valores iniciales muy altos)
 
 % inicializacion variables de salida
 yt=zeros(fix(tmax/dt)+1,6);
@@ -36,11 +36,11 @@ for t1=0:dt:tmax
 end
 
 % dibuja respuesta de angulo
-plot(tt,yt(:,1)*180/pi); xlabel('tiempo, segs'); ylabel('Alfa, grados'); pause
+%plot(tt,yt(:,1)*180/pi); xlabel('tiempo, segs'); ylabel('Alfa, grados'); pause
 %plot(tt,yt(:,2)*180/pi); xlabel('tiempo, segs'); ylabel('Velocidad angular en alfa, grados/segundo');
-plot(tt,yt(:,3)*180/pi); xlabel('tiempo, segs'); ylabel('Beta, grados'); pause
+%plot(tt,yt(:,3)*180/pi); xlabel('tiempo, segs'); ylabel('Beta, grados'); pause
 %plot(tt,yt(:,4)*180/pi); xlabel('tiempo, segs'); ylabel('Velocidad angular en beta, grados/segundo'); pause
-plot(tt,yt(:,5)); xlabel('tiempo, segs'); ylabel('Largo flecha, metros'); pause
-%plot(tt,yt(:,6)); xlabel('tiempo, segs'); ylabel('Velocidad movimiento flecha, metros/segundo'); pause
+%plot(tt,yt(:,5)); xlabel('tiempo, segs'); ylabel('Largo flecha, metros'); pause
+plot(tt,yt(:,6)); xlabel('tiempo, segs'); ylabel('Velocidad movimiento flecha, metros/segundo'); pause
 
 
