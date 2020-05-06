@@ -2,7 +2,7 @@
 clear
 %F=0; % fuerza externa en cero
 
-y0=[(pi/6)*pi/180 0.6 (pi/3)*pi/180 0.6 5 1]; % condiciones iniciales
+y0=[(pi/6) 0.6 (pi/3) 0.6 5 1]; % condiciones iniciales
 dt=0.1;  % periodo del sistema
 k=1;
 tmax=25;  % tiempo maximo de la simulacion (ojo con tiempo de simulacion para valores iniciales muy altos)
@@ -24,7 +24,7 @@ for t1=0:dt:tmax
     
     if yt(k,3)<0, yt(k,3)=yt(k,3)+2*pi; end;
     if yt(k,3)>2*pi, yt(k,3)=yt(k,3)-2*pi; end;
-    
+    if yt(k,3)>2*pi, yt(k,3)=yt(k,3)-2*pi; end;
     % toma ultimo valor tiempo simulado
     tt(k,:)=t(max(size(y)));
     
@@ -35,12 +35,13 @@ for t1=0:dt:tmax
     k=k+1;
 end
 
+
 % dibuja respuesta de angulo
-plot(tt,yt(:,1)*180/pi); xlabel('tiempo, segs'); ylabel('Alfa, grados'); pause
+plot(tt,yt(:,1)*180/pi); xlabel('tiempo, segs'); ylabel('Alfa, grados'); 
 %plot(tt,yt(:,2)*180/pi); xlabel('tiempo, segs'); ylabel('Velocidad angular en alfa, grados/segundo');
-plot(tt,yt(:,3)*180/pi); xlabel('tiempo, segs'); ylabel('Beta, grados'); pause
+%plot(tt,yt(:,3)*180/pi); xlabel('tiempo, segs'); ylabel('Beta, grados'); 
 %plot(tt,yt(:,4)*180/pi); xlabel('tiempo, segs'); ylabel('Velocidad angular en beta, grados/segundo'); pause
-plot(tt,yt(:,5)); xlabel('tiempo, segs'); ylabel('Largo flecha, metros'); pause
+%plot(tt,yt(:,5)); xlabel('tiempo, segs'); ylabel('Largo flecha, metros'); 
 %plot(tt,yt(:,6)); xlabel('tiempo, segs'); ylabel('Velocidad movimiento flecha, metros/segundo'); pause
 
 
