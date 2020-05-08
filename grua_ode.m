@@ -5,7 +5,7 @@ clear
 y0=[(pi/3) -0.6 (pi/6) 0.6 5 1]; % condiciones iniciales
 dt=0.1;  % periodo del sistema
 k=1;
-tmax=5;  % tiempo maximo de la simulacion (ojo con tiempo de simulacion para valores iniciales muy altos)
+tmax=20;  % tiempo maximo de la simulacion (ojo con tiempo de simulacion para valores iniciales muy altos)
 
 % inicializacion variables de salida
 yt=zeros(fix(tmax/dt)+1,6);
@@ -20,9 +20,9 @@ for t1=0:dt:tmax
     % toma ultimo valor del vector
     yt(k,:)=y(max(size(y)),:);
     
-    % usa valor entre 0 y 2pi
-    if yt(k,1)<0, yt(k,1)=yt(k,1)+2*pi; end;
-    if yt(k,1)>2*pi, yt(k,1)=yt(k,1)-2*pi; end;
+    % usa valor entre 0 y 2pi para el beta
+    if yt(k,3)<0, yt(k,3)=yt(k,3)+2*pi; end;
+    if yt(k,3)>2*pi, yt(k,3)=yt(k,3)-2*pi; end;
     
     
     if yt(k,1)>pi/2, yt(k,1)=pi/2;end;
@@ -31,9 +31,28 @@ for t1=0:dt:tmax
     if yt(k,1)<0, yt(k,1)=0;end;
     if yt(k,1)<0, yt(k,2)=0;end;
     
-    if yt(k,5)>45, yt(k,5)=45; end;
-    if yt(k,5)>45, yt(k,6)=0; end;
+    if yt(k,5)>85  %si la longitud de la flecha es mayor a 85 respecto al final del brazo (es decir la flecha mide maximo 85)
+        yt(k,5)=85;
+        yt(k,6)=0; 
+    end
     
+     if yt(k,5)<0  %si la longitud de la flecha es mayor a 85 respecto al final del brazo (es decir la flecha mide maximo 85)
+        yt(k,5)=0;
+        yt(k,6)=0; 
+    end
+    
+    
+    if yt(k,6)>24   %velocidad maxima de translacion de la flecha es 24 m/s (aprox 85km/h)
+        yt(k,6)=24;
+    end
+    
+    if yt(k,4)>5
+        yt(k,4)=5;
+    end
+    
+    if yt(k,4)<-5
+        yt(k,4)=-5;
+    end
     
    
    
@@ -69,5 +88,3 @@ plot(tt,yt(:,4)*180/pi); xlabel('tiempo, segs'); ylabel('Velocidad beta');
  subplot(3,1,3)
 
 plot(tt,yt(:,6)); xlabel('tiempo, segs'); ylabel('Velocidad flecha'); 
-
-
