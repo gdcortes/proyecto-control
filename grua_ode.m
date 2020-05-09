@@ -84,7 +84,8 @@ end
 figure(1)
 subplot(3,1,1)
 % dibuja respuesta de angulo
-plot(tt,yt(:,1)*180/pi); xlabel('tiempo, segs'); ylabel('Alfa, grados'); 
+plot(tt,yt(:,1)*180/pi); xlabel('tiempo, segs'); ylabel('Alfa, grados');
+
 subplot(3,1,2)
 plot(tt,yt(:,3)*180/pi); xlabel('tiempo, segs'); ylabel('Beta, grados'); 
 
@@ -103,4 +104,17 @@ plot(tt,yt(:,4)*180/pi); xlabel('tiempo, segs'); ylabel('Velocidad beta');
  subplot(3,1,3)
 
 plot(tt,yt(:,6)); xlabel('tiempo, segs'); ylabel('Velocidad flecha'); 
+
+
+figure (3)
+
+subplot(3,1,1)
+plot(tt,awgn(yt(:,1),20)*180/pi); xlabel('tiempo, segs'); ylabel('Alfa, grados');
+
+subplot(3,1,2)
+plot(tt,awgn(yt(:,3),20)*180/pi); xlabel('tiempo, segs'); ylabel('Beta, grados'); 
+
+
+subplot(3,1,3)
+plot(tt,awgn(yt(:,5),0)); xlabel('tiempo, segs'); ylabel('Largo flecha, metros');
 
